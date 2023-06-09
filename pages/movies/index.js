@@ -1,8 +1,19 @@
-export default function Page(props) {
-  console.log("mah props", props.genres);
+import Link from "next/link";
+
+export default function Page({ movies }) {
+  console.log("mah props", movies.genres);
   return (
     <>
-      <h1>Movies</h1>
+      <h1>Movies Genres</h1>
+      <ul>
+        {movies.genres.map((genre, index) => {
+          return (
+            <Link href={`/movies/list/${index}`}>
+              <li>{genre.name}</li>
+            </Link>
+          );
+        })}
+      </ul>
     </>
   );
 }
