@@ -1,16 +1,16 @@
 import Link from "next/link";
 
-export default function Page({ movies }) {
-  console.log("mah props", movies.genres);
+export default function Page({ moviesGenres }) {
+  console.log("mah props", moviesGenres);
   return (
     <>
       <h1>Movies Genres</h1>
       <ul>
-        {movies.genres.map((genre, index) => {
+        {moviesGenres.map((genre, index) => {
           return (
-            <Link href={`/movies/list/${index}`}>
-              <li>{genre.name}</li>
-            </Link>
+            <li key={index}>
+              <Link href={`/movies/list/${genre.name}`}>{genre.name}</Link>
+            </li>
           );
         })}
       </ul>
@@ -19,8 +19,8 @@ export default function Page({ movies }) {
 }
 
 export async function getStaticProps() {
-  const movies = await fetch("http://localhost:3002/api/movies/movie");
+  const movies = await fetch("http://localhost:3000/api/movies");
   const moviesJson = await movies.json();
-  console.log("MoviesJson:", moviesJson);
-  return { props: { movies: moviesJson } }; // https://} };
+  console.log("MoviesGenres", moviesJson.genres);
+  return { props: { moviesGenres: moviesJson.genres } };
 }

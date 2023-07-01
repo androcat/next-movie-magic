@@ -116,10 +116,13 @@ export default function Home() {
 
 export async function getStaticProps() {
   const getMovies = async () => {
-    const movies = await fetch("http://localhpst:3002/api/movies/movie.js");
+    const movies = await fetch("http://localhost:3000/api/movies/movie");
+
+    console.log(movies);
+
     const moviesJson = await movies.json();
     return moviesJson;
   };
   const movies = await getMovies();
-  // return { props: { movies: movies / https://} };
+  return { props: { movies: movies } };
 }
